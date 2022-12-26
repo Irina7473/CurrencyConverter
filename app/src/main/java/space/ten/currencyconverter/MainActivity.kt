@@ -48,22 +48,22 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         // Определяем разметку для использования при выборе элемента
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Применяем адаптер к элементу spinner
-        sp1.setAdapter(adapter);
-        sp2.setAdapter(adapter);
-        sp1.setOnItemSelectedListener(this);
-        sp2.setOnItemSelectedListener(this);
+        sp1.adapter = adapter;
+        sp2.adapter = adapter;
+        sp1.onItemSelectedListener = this;
+        sp2.onItemSelectedListener = this;
     }
 
     public fun onButtonClicked(view:View){
-        var value = Integer.parseInt(number.getText().toString())
-        var currency1 = currency.get(sp1.getSelectedItemPosition())
-        var currency2 = currency.get(sp2.getSelectedItemPosition())
+        val value = Integer.parseInt(number.getText().toString())
+        val currency1 = currency[sp1.getSelectedItemPosition()]
+        val currency2 = currency[sp2.getSelectedItemPosition()]
 
         if (type!="") {
-            var rateK = currency1.Conversion(currency2, type);
-            var res = value * rateK;
-            rate.setText(rateK.toString())
-            result.setText(String.format("%.2f",res));
+            val rateK = currency1.Conversion(currency2, type);
+            val res = value * rateK;
+            rate.text = rateK.toString()
+            result.text = String.format("%.2f",res);
         }
 
     }
